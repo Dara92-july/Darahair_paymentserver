@@ -5,9 +5,11 @@ dotenv.config();
 
 const paymentRoutes = require("../routes/paymentRoutes");
 
-const app = express();
+const app = express;
 
-const clientUrl = (process.env.CLIENT_URL || "https://dara-hair-website.vercel.app").replace(/\/$/, "");
+// Use the payment API URL from env, fallback to default
+const paymentApiUrl = process.env.PAYMENT_API_URL || "https://darahair-payment-server.onrender.com";
+const clientUrl = process.env.CLIENT_URL || new URL(paymentApiUrl).origin;
 
 const corsOptions = {
   origin: clientUrl,
